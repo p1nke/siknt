@@ -1,4 +1,4 @@
-class TasksController < ApplicationController
+ class TasksController < ApplicationController
  before_action :authenticate_user!
   before_action :set_task, only: [:show, :edit, :update, :destroy, :change]
 
@@ -9,6 +9,7 @@ class TasksController < ApplicationController
     @doing = current_user.tasks.where(state: "doing")
     @done = current_user.tasks.where(state: "done")
   end
+  
 
   # GET /tasks/1
   # GET /tasks/1.json
@@ -63,10 +64,10 @@ class TasksController < ApplicationController
       format.json { head :no_content }
     end
 
-  def change 
-    @task.update_attributes(state: params[:state])
-    respond_to do |format|
-      format.html {redirect_to tasks_path, notice: "Task Update"}
+  def change
+     @task.update_attributes(state: params[:state])
+  respond_to do |format|
+    format.html {redirect_to tasks_path, notice: "Task Update"}
   end 
   end
 
